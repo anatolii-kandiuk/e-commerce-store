@@ -1,7 +1,12 @@
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import { Container } from "@mui/system";
 import { useState } from "react";
+import { Route } from "react-router-dom";
+import AboutPage from "../../features/about/AboutPage";
 import Catalog from "../../features/catalog/Catalog";
+import ProductDetails from "../../features/catalog/ProductDetails";
+import HomePage from "../../features/home/HomePage";
+import ContactPage from "../../features/contact/ContactPage";
 import Header from "./Header";
 
 
@@ -13,7 +18,7 @@ function App() {
     palette: {
       mode: paleteType,
       background: {
-        default: paleteType === 'light' ? '#eaeaea' : '121212'
+        default: paleteType === 'light' ? '#eaeaea' : '#121212'
       }
     }
   });
@@ -27,7 +32,11 @@ function App() {
       <CssBaseline />
       <Header darkMode={darkMode} handleThemeChange={handleThemeChange} />
       <Container>
-        <Catalog />
+        <Route exact path='/' component={HomePage} />
+        <Route exact path='/catalog' component={Catalog} />
+        <Route path='/catalog/:id' component={ProductDetails} />
+        <Route path='/about' component={AboutPage} />
+        <Route path='/contact' component={ContactPage} />
       </Container>
      </ThemeProvider>
   );
